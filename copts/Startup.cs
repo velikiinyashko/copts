@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace copts
 {
@@ -22,6 +25,15 @@ namespace copts
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            var Constring = "Host=db.copts.ru;Port=1111;Database=copts;Username=root;Password=0nA7yW19";
+            services.AddDbContext<Models.Context>(options =>
+            options.UseNpgsql(Constring));
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddScheme(options =>
+            {
+                options.LoginPath = new Microsoft.AspNetCore.Http.PathString("");
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(120);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +50,8 @@ namespace copts
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
