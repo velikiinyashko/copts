@@ -13,7 +13,7 @@ namespace copts.Models
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public int? RolesId { get; set; }
+        public int? RulesId { get; set; }
         public Rules Rules { get; set; }
 
         public int? CompanyId { get; set; }

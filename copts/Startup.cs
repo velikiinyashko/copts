@@ -28,11 +28,11 @@ namespace copts
             var Constring = "Host=db.copts.ru;Port=1111;Database=copts;Username=root;Password=0nA7yW19";
             services.AddDbContext<Models.Context>(options =>
             options.UseNpgsql(Constring));
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddScheme(options =>
-            {
-                options.LoginPath = new Microsoft.AspNetCore.Http.PathString("");
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(120);
-            });
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddScheme(options =>
+            //{
+            //    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("");
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(120);
+            //});
 
         }
 
