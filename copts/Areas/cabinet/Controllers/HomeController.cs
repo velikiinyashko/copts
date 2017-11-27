@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace copts.Areas.cabinet.Controllers
 {
+    [Area("cabinet")]
     public class HomeController : Controller
     {
         [Authorize]
