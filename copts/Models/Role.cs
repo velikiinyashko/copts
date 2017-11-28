@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace copts.Models
 {
-    public class Roles
+    public class Role
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Users> Users { get; set; }
+        public List<User> Users { get; set; }
 
-        public Roles()
+        public Role()
         {
-            Users = new List<Models.Users>();
+            Users = new List<Models.User>();
         }
     }
 }

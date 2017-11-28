@@ -40,8 +40,8 @@ namespace copts.Areas.cabinet.Controllers
         {
             if (ModelState.IsValid)
             {
-                Users user = await _context.Users
-                    .Include(u => u.Roles)
+                User user = await _context.Users
+                    .Include(u => u.Role)
                     .FirstOrDefaultAsync(u => u.Login == login.Login && u.Password == login.Password);
                 if(user != null)
                 {
@@ -64,14 +64,14 @@ namespace copts.Areas.cabinet.Controllers
         {
             if (ModelState.IsValid)
             {
-                Users user = await _context.Users.FirstOrDefaultAsync(u => u.Login == register.Login);
+                User user = await _context.Users.FirstOrDefaultAsync(u => u.Login == register.Login);
                 if (user == null)
                 {
-                    user = new Users { Login = register.Login, Password = register.Password, Email = register.Email, Name = register.Name, Surname = register.Surname };
-                    Roles userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+                    user = new User { Login = register.Login, Password = register.Password, Email = register.Email, Name = register.Name, Surname = register.Surname };
+                    Role userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "user");
                     if (userRole != null)
                     {
-                        user.Roles = userRole;
+                        user.Role = userRole;
                     }
                     _context.Users.Add(user);
                     await _context.SaveChangesAsync();
@@ -88,13 +88,13 @@ namespace copts.Areas.cabinet.Controllers
             return View(register);
         }
 
-        private async Task Authenticate(Users user)
+        private async Task Authenticate(User user)
         {
             // создаем один claim
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Roles?.Name)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.Name)
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,

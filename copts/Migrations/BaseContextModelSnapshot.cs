@@ -20,7 +20,7 @@ namespace copts.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
-            modelBuilder.Entity("copts.Models.Companys", b =>
+            modelBuilder.Entity("copts.Models.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -46,7 +46,7 @@ namespace copts.Migrations
                     b.ToTable("Companys");
                 });
 
-            modelBuilder.Entity("copts.Models.Roles", b =>
+            modelBuilder.Entity("copts.Models.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -58,7 +58,7 @@ namespace copts.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("copts.Models.Users", b =>
+            modelBuilder.Entity("copts.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -73,7 +73,7 @@ namespace copts.Migrations
 
                     b.Property<string>("Password");
 
-                    b.Property<int?>("RolesId");
+                    b.Property<int?>("RoleId");
 
                     b.Property<string>("Surname");
 
@@ -83,20 +83,20 @@ namespace copts.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("RolesId");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("copts.Models.Users", b =>
+            modelBuilder.Entity("copts.Models.User", b =>
                 {
-                    b.HasOne("copts.Models.Companys", "Company")
+                    b.HasOne("copts.Models.Company", "Company")
                         .WithMany("Users")
                         .HasForeignKey("CompanyId");
 
-                    b.HasOne("copts.Models.Roles", "Roles")
+                    b.HasOne("copts.Models.Role", "Role")
                         .WithMany("Users")
-                        .HasForeignKey("RolesId");
+                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }

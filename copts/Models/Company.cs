@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace copts.Models
 {
-    public class Companys
+    public class Company
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,11 +17,11 @@ namespace copts.Models
         public int Inn { get; set; }
         public int Kpp { get; set; }
 
-        public List<Users> Users { get; set; }
+        public List<User> Users { get; set; }
 
-        public Companys()
+        public Company()
         {
-            Users = new List<Models.Users>();
+            Users = new List<Models.User>();
         }
     }
 }

@@ -1,7 +1,45 @@
-﻿
+﻿@model copts.Areas.cabinet.ViewModels.RegisterModel
 @{
     ViewData["Title"] = "Registrate";
 }
-
-<h2>Registrate</h2>
-
+<h2>Регистрация</h2>
+<div class="container">
+    <form asp-action="registrate" asp-controller="home" asp-antiforgery="true">
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label class="control-label" asp-for="Login">Имя пользователя</label>
+            <input type="text" class="form-control" asp-for="Login" placeholder="Логин" />
+            <span asp-validation-for="Login"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="Name">Имя</label>
+            <input type="text" class="form-control" asp-for="Name" placeholder="Имя" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label text-center" asp-for="Surname">Фамилия</label>
+            <input type="text" class="form-control" asp-for="Surname" placeholder="Фамилия" />
+            <span asp-validation-for="Surname"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="Email">Электронная почта</label>
+            <input class="form-control" type="email" asp-for="Email" placeholder="E-mail" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="Password">Пароль</label>
+            <input type="password" class="form-control" asp-for="Password" placeholder="Пароль" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="ConfirmPassword">Повторить пароль</label>
+            <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Повторить пароль" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+        <div class="form-group">
+            <div class="form-inline">
+                <input type="submit" class="btn btn-primary" value="Регистрация" />
+            </div>
+        </div>
+    </form>
+</div>

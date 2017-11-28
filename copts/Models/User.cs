@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace copts.Models
 {
-    public class Users
+    public class User
     {
         public int Id { get; set; }
         public string Login { get; set; }
@@ -15,10 +15,10 @@ namespace copts.Models
         public string Surname { get; set; }
         public string VerificateEmail { get; set; }
 
-        public int? RolesId { get; set; }
-        public Roles Roles { get; set; }
+        public int? RoleId { get; set; }
+        public Role Role { get; set; }
 
         public int? CompanyId { get; set; }
-        public Companys Company { get; set; }
+        public Company Company { get; set; }
     }
 }

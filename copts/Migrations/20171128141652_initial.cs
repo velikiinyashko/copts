@@ -53,7 +53,7 @@ namespace copts.Migrations
                     Login = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
-                    RolesId = table.Column<int>(nullable: true),
+                    RoleId = table.Column<int>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
                     VerificateEmail = table.Column<string>(nullable: true)
                 },
@@ -67,8 +67,8 @@ namespace copts.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Users_Roles_RolesId",
-                        column: x => x.RolesId,
+                        name: "FK_Users_Roles_RoleId",
+                        column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -80,9 +80,9 @@ namespace copts.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_RolesId",
+                name: "IX_Users_RoleId",
                 table: "Users",
-                column: "RolesId");
+                column: "RoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
