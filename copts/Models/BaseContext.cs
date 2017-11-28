@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace copts.Models
 {
-    public class Context : DbContext
+    public class BaseContext : DbContext
     {
         public DbSet<Users> Users { get; set; }
         public DbSet<Companys> Companys { get; set; }
+        public DbSet<Roles> Roles { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseNpgsql("Host=db.copts.ru;Port=1111;Database=copts;Username=root;Password=0nA7yW19");
         //}
 
-        public Context(DbContextOptions<Context> options) : base(options)
+        public BaseContext(DbContextOptions<BaseContext> options) : base(options)
         {
 
         }

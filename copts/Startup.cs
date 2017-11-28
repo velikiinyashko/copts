@@ -26,7 +26,7 @@ namespace copts
         {
             services.AddMvc();
             var Constring = "Host=db.copts.ru;Port=1111;Database=copts;Username=root;Password=0nA7yW19";
-            services.AddDbContext<Models.Context>(options =>
+            services.AddDbContext<Models.BaseContext>(options =>
             options.UseNpgsql(Constring));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {

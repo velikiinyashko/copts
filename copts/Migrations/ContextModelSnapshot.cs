@@ -10,7 +10,7 @@ using System;
 
 namespace copts.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(Models.BaseContext))]
     partial class ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

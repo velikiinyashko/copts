@@ -10,7 +10,7 @@ using System;
 
 namespace copts.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(Models.BaseContext))]
     [Migration("20171127093747_initial")]
     partial class initial
     {

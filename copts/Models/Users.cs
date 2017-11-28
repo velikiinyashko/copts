@@ -10,11 +10,12 @@ namespace copts.Models
         public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public string Email { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public int? RulesId { get; set; }
-        public Rules Rules { get; set; }
+        public int? RolesId { get; set; }
+        public Roles Roles { get; set; }
 
         public int? CompanyId { get; set; }
         public Companys Company { get; set; }
