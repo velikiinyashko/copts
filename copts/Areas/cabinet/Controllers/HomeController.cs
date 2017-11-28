@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace copts.Areas.cabinet.Controllers
 {
@@ -40,14 +42,15 @@ namespace copts.Areas.cabinet.Controllers
         {
             if (ModelState.IsValid)
             {
+                string passwd = HashMD5(login.Password);
                 User user = await _context.Users
                     .Include(u => u.Role)
-                    .FirstOrDefaultAsync(u => u.Login == login.Login && u.Password == login.Password);
+                    .FirstOrDefaultAsync(u => u.Login == login.Login && u.Password == passwd);
                 if(user != null)
                 {
                     await Authenticate(user);
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("index");
                 }
                 ModelState.AddModelError("", "Не корректные логин и(или) пароль");
             }
@@ -67,8 +70,9 @@ namespace copts.Areas.cabinet.Controllers
                 User user = await _context.Users.FirstOrDefaultAsync(u => u.Login == register.Login);
                 if (user == null)
                 {
-                    user = new User { Login = register.Login, Password = register.Password, Email = register.Email, Name = register.Name, Surname = register.Surname };
-                    Role userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+                    string passwd = HashMD5(register.Password);
+                    user = new User { Login = register.Login, Password = passwd, Email = register.Email, Name = register.Name, Surname = register.Surname };
+                    Role userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "User");
                     if (userRole != null)
                     {
                         user.Role = userRole;
@@ -88,6 +92,12 @@ namespace copts.Areas.cabinet.Controllers
             return View(register);
         }
 
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("index");
+        }
+
         private async Task Authenticate(User user)
         {
             // создаем один claim
@@ -101,6 +111,20 @@ namespace copts.Areas.cabinet.Controllers
                 ClaimsIdentity.DefaultRoleClaimType);
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+
+        public string HashMD5(string text)
+        {
+            using(MD5 Md5Hash = MD5.Create())
+            {
+                byte[] data = Md5Hash.ComputeHash(Encoding.UTF8.GetBytes(text));
+                StringBuilder builder = new StringBuilder();
+                for(int i = 0; i < data.Length; i++)
+                {
+                    builder.Append(data[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
     }
 }
