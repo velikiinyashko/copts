@@ -30,7 +30,7 @@ namespace copts.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rules",
+                name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -39,7 +39,7 @@ namespace copts.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rules", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,12 +49,13 @@ namespace copts.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CompanyId = table.Column<int>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     Login = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     RolesId = table.Column<int>(nullable: true),
-                    RulesId = table.Column<int>(nullable: true),
-                    Surname = table.Column<string>(nullable: true)
+                    Surname = table.Column<string>(nullable: true),
+                    VerificateEmail = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,9 +67,9 @@ namespace copts.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Users_Rules_RulesId",
-                        column: x => x.RulesId,
-                        principalTable: "Rules",
+                        name: "FK_Users_Roles_RolesId",
+                        column: x => x.RolesId,
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -79,9 +80,9 @@ namespace copts.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_RulesId",
+                name: "IX_Users_RolesId",
                 table: "Users",
-                column: "RulesId");
+                column: "RolesId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -93,7 +94,7 @@ namespace copts.Migrations
                 name: "Companys");
 
             migrationBuilder.DropTable(
-                name: "Rules");
+                name: "Roles");
         }
     }
 }

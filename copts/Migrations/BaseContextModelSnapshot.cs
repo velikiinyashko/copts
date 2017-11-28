@@ -10,11 +10,10 @@ using System;
 
 namespace copts.Migrations
 {
-    [DbContext(typeof(Models.BaseContext))]
-    [Migration("20171127093747_initial")]
-    partial class initial
+    [DbContext(typeof(BaseContext))]
+    partial class BaseContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +46,7 @@ namespace copts.Migrations
                     b.ToTable("Companys");
                 });
 
-            modelBuilder.Entity("copts.Models.Rules", b =>
+            modelBuilder.Entity("copts.Models.Roles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -56,7 +55,7 @@ namespace copts.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rules");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("copts.Models.Users", b =>
@@ -66,6 +65,8 @@ namespace copts.Migrations
 
                     b.Property<int?>("CompanyId");
 
+                    b.Property<string>("Email");
+
                     b.Property<string>("Login");
 
                     b.Property<string>("Name");
@@ -74,15 +75,15 @@ namespace copts.Migrations
 
                     b.Property<int?>("RolesId");
 
-                    b.Property<int?>("RulesId");
-
                     b.Property<string>("Surname");
+
+                    b.Property<string>("VerificateEmail");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("RulesId");
+                    b.HasIndex("RolesId");
 
                     b.ToTable("Users");
                 });
@@ -93,9 +94,9 @@ namespace copts.Migrations
                         .WithMany("Users")
                         .HasForeignKey("CompanyId");
 
-                    b.HasOne("copts.Models.Rules", "Rules")
+                    b.HasOne("copts.Models.Roles", "Roles")
                         .WithMany("Users")
-                        .HasForeignKey("RulesId");
+                        .HasForeignKey("RolesId");
                 });
 #pragma warning restore 612, 618
         }

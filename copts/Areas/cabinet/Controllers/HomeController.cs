@@ -60,9 +60,32 @@ namespace copts.Areas.cabinet.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Rgistrate(Users users)
+        public async Task<IActionResult> Registrate(RegisterModel register)
         {
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                Users user = await _context.Users.FirstOrDefaultAsync(u => u.Login == register.Login);
+                if (user == null)
+                {
+                    user = new Users { Login = register.Login, Password = register.Password, Email = register.Email, Name = register.Name, Surname = register.Surname };
+                    Roles userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+                    if (userRole != null)
+                    {
+                        user.Roles = userRole;
+                    }
+                    _context.Users.Add(user);
+                    await _context.SaveChangesAsync();
+
+                    await Authenticate(user);
+
+                    return RedirectToAction("index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Не корректные логин и(или пароль");
+                }
+            }
+            return View(register);
         }
 
         private async Task Authenticate(Users user)
