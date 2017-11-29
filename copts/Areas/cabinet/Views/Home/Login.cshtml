@@ -1,4 +1,5 @@
-﻿@model copts.Areas.cabinet.ViewModels.LoginModel
+﻿@using copts.Areas.cabinet.ViewModels
+@model LoginModel
 @{
     ViewData["Title"] = "Login";
 }
@@ -6,22 +7,20 @@
 <div class="container">
     <form asp-action="login" asp-controller="home" asp-antiforgery="true">
         <div class="validation" asp-validation-summary="ModelOnly"></div>
-        <div>
-            <div class="form-group">
-                <label class="control-label" asp-for="Login">Имя пользователя</label>
-                <input class="form-control" type="text" asp-for="Login" placeholder="Имя пользователя" />
-                <span asp-validation-for="Login"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label" asp-for="Password">Пароль</label>
-                <input class="form-control" type="password" asp-for="Password" placeholder="Пароль" />
-                <span asp-validation-for="Password"></span>
-            </div>
-            <div class="form-group">
-                <div class="form-inline">
-                    <input type="submit" value="Вход" class="btn btn-primary" />
-                    <a asp-action="registrate" asp-controller="home" class="btn btn-danger">Регистрация</a>
-                </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="Login">Имя пользователя</label>
+            <input class="form-control" type="text" asp-for="Login" placeholder="Имя пользователя" />
+            <span asp-validation-for="Login"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="Password">Пароль</label>
+            <input class="form-control" type="password" asp-for="Password" placeholder="Пароль" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-group">
+            <div class="form-inline">
+                <input type="submit" value="Вход" class="btn btn-primary" />
+                <a asp-action="registrate" asp-controller="home" class="btn btn-danger">Регистрация</a>
             </div>
         </div>
     </form>

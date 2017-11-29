@@ -31,6 +31,7 @@ namespace copts.Areas.cabinet.Controllers
             return View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> Login()
         {
             return View();
@@ -38,15 +39,16 @@ namespace copts.Areas.cabinet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel login)
+        public async Task<IActionResult> Login(LoginModel lm)
         {
+
             if (ModelState.IsValid)
             {
-                string passwd = HashMD5(login.Password);
+                string passwd = HashMD5(lm.Password);
                 User user = await _context.Users
                     .Include(u => u.Role)
-                    .FirstOrDefaultAsync(u => u.Login == login.Login && u.Password == passwd);
-                if(user != null)
+                    .FirstOrDefaultAsync(u => u.Login == lm.Login && u.Password == passwd);
+                if (user != null)
                 {
                     await Authenticate(user);
 
@@ -54,15 +56,17 @@ namespace copts.Areas.cabinet.Controllers
                 }
                 ModelState.AddModelError("", "Не корректные логин и(или) пароль");
             }
-            return View(login);
+            return View(lm);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Registrate()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registrate(RegisterModel register)
         {
             if (ModelState.IsValid)
@@ -86,7 +90,7 @@ namespace copts.Areas.cabinet.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Не корректные логин и(или пароль");
+                    ModelState.AddModelError("", "Не корректные логин и(или) пароль");
                 }
             }
             return View(register);
