@@ -10,6 +10,27 @@
     padding-right: 15px;
 }
 
+.div-con {
+    padding-left: 35%;
+    padding-right: 35%;
+    outline-color: black;
+}
+
+#BtnLogin
+{
+    display: none;
+}
+
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+}
+
+.navbar-login
+{
+    width: 300px;
+}
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
