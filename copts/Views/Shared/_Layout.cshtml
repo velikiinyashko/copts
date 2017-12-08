@@ -1,6 +1,4 @@
-﻿@using copts.Areas.cabinet.ViewModels
-@model LoginModel
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -31,60 +29,29 @@
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
             @if (User.Identity.IsAuthenticated)
             {
-                @if (User.IsInRole("User"))
-                {
                     <div class="dropdown">
-                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle btn-menu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @User.Identity.Name
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" asp-action="logout" asp-controller="home">Выход</a>
+                            <div class="menu">
+
+                            </div>
                         </div>
                     </div>
-
-                }
-                else if (User.IsInRole("Administrator"))
-                {
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @User.Identity.Name
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <a class="dropdown-item" asp-action="logout" asp-controller="home" asp-area="cabinet"><i class="fa fa-sign-out"></i> Выход</a>
-                        </div>
-                    </div>
-
-                }
-                else
-                {
-
-                }
             }
             else
             {
                 <div class="my-2 my-lg-0">
                     <div class="dropdown">
-                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-success dropdown-toggle btn-login" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-sign-in"></i>
                             Вход
                         </button>
                         <div class="dropdown-menu dropdown-menu-right navbar-login">
-                            <form asp-action="login" asp-controller="home" asp-area="cabinet" class="px-4 py-3">
-                                <div class="form-group">
-                                    <label class="form-control-label" asp-for="Login"><i class="fa fa-user"></i> Пользователь:</label>
-                                    <input type="text" class="form-control" asp-for="Login" placeholder="Login">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label" asp-for="Password"><i class="fa fa-key"></i> Пароль:</label>
-                                    <input type="password" class="form-control" asp-for="Password" placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Вход</button>
-                                </div>
-                            </form>
+                            <div class="login">
+                                <!--динамически подгружает частичное представление "Enter"-->
+                            </div>
                         </div>
                     </div>
                 </div>

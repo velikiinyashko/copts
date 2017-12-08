@@ -20,6 +20,8 @@
   <ItemGroup>
     <Folder Include="Areas\cabinet\Data\" />
     <Folder Include="Areas\cabinet\Models\" />
+    <Folder Include="Areas\task\Data\" />
+    <Folder Include="Areas\task\Models\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 

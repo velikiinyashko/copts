@@ -1,0 +1,43 @@
+﻿@using copts.Models
+@model IEnumerable<TaskObj>
+@{
+    ViewData["Title"] = "Intex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Заявки</h2>
+<table>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Date</td>
+            <td>Priroty</td>
+            <td>Subject</td>
+            <td>Attachment</td>
+            <td>Status</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var i in Model)
+        {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.DateTime</td>
+                <td>@i.PriorityTask.Name</td>
+                <td>@i.Subject</td>
+                @if(i.Attachment != 0)
+                {
+                    <td><i class="fa fa-paperclip"</td>
+
+                }
+                else
+                {
+                    <td><i class="fa fa-times"></i></td>
+
+                }
+                <td>@i.StatusTask.Name</td>
+            </tr>
+
+        }
+    </tbody>
+</table>

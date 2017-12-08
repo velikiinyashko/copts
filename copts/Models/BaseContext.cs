@@ -11,6 +11,9 @@ namespace copts.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Company> Companys { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<TaskObj> Tasks { get; set; }
+        public DbSet<PriorityTask> Prioritys { get; set; }
+        public DbSet<StatusTask> Statuss { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

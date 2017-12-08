@@ -1,0 +1,21 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@if (User.IsInRole("User"))
+{
+            <a class="dropdown-item" asp-action="index" asp-controller="profile" asp-area="cabinet" asp-route-name="@User.Identity.Name"><i class="fa fa-user-circle"> Профиль</i></a>
+            <a class="dropdown-item" asp-action="index" asp-controller="home" asp-area="cabinet"><i class="fa fa-asterisk"></i> Кабитет</a>
+            <a class="dropdown-item" asp-action="logout" asp-controller="home" asp-area="cabinet"><i class="fa fa-sign-out"></i> Выход</a>
+}
+else if (User.IsInRole("Administrator"))
+{
+            <a class="dropdown-item" asp-action="index" asp-controller="profile" asp-area="cabinet" asp-route-name="@User.Identity.Name"><i class="fa fa-user-circle"> Профиль</i></a>
+            <a class="dropdown-item" asp-action="index" asp-controller="admin" asp-area="cabinet"><i class="fa fa-asterisk"></i> admin</a>
+            <a class="dropdown-item" asp-action="logout" asp-controller="home" asp-area="cabinet"><i class="fa fa-sign-out"></i> Выход</a>
+}
+else
+{
+
+}

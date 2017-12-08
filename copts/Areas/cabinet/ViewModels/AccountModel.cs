@@ -6,15 +6,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace copts.Areas.cabinet.ViewModels
 {
-    public class LoginModel
+    public class AccountModel
     {
+        [Required]
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Не указан Логин")]
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public string Login { get; set; }
-
-        [Required(ErrorMessage = "Не указан Пароль")]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
+        public string Email { get; set; }
+        public string Role { get; set; }
     }
 }

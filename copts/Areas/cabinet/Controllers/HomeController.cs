@@ -25,10 +25,23 @@ namespace copts.Areas.cabinet.Controllers
             _context = context;
         }
 
-        [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Enter()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Menu()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Index(int? Id)
+        {
+            User user = await _context.Users
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync(u => u.Id == Id);
+            return View(user);
         }
 
         [HttpGet]
